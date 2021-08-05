@@ -1,0 +1,9 @@
+[submodule "front-end"]
+	path = front-end
+	url = git@github.com:CViniciusSDias/alura-ms-front.git
+[submodule "mkt-node"]
+	path = mkt-node
+	url = git@github.com:CViniciusSDias/alura-ms-mkt-node.git
+[submodule "financeiro-php"]
+	path = financeiro-php
+	url = git@github.com:CViniciusSDias/alura-ms-financeiro-php.git
