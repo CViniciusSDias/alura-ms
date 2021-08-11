@@ -1,0 +1,48 @@
+version: '3.7'
+services:
+  front:
+    image: node
+    volumes:
+      - ./front-end:/app
+    working_dir: /app
+    command: "npm start -- --host=0.0.0.0 --port 4200"
+    ports: 
+      - 4200:4200
+    environment:
+      API_URL: "http://web-mkt:3000"
+  web-mkt:
+    image: node
+    volumes:
+      - ./mkt-node:/app
+    working_dir: /app
+    command: "npm start"
+    environment: 
+      SERVER_PORT: 3000
+      MONGO_URL: "mongodb://mkt-usuario:mkt-senha@mongo-mkt:27017/mkt?authSource=admin"
+    ports:
+      - 3000:3000
+  mongo-mkt:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mkt-usuario
+      MONGO_INITDB_ROOT_PASSWORD: mkt-senha
+      MONGO_INITDB_DATABASE: mkt
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - 5672:5672
+  web-financeiro:
+    build: phpswoole/swoole
+    command: php index.php
+    ports:
+      - 9501:9501
+    volumes:
+      - ./financeiro-php:/app
+    working_dir: /app
+  api-gateway:
+    image: nginx
+    volumes:
+      - ./servicos-nginx:/etc/nginx/conf.d
+    restart: always
+    ports:
+      - 80:80
