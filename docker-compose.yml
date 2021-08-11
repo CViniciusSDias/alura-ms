@@ -32,7 +32,7 @@ services:
     ports:
       - 5672:5672
   web-financeiro:
-    build: phpswoole/swoole
+    build: ./financeiro-php
     command: php index.php
     ports:
       - 9501:9501
@@ -46,3 +46,11 @@ services:
     restart: always
     ports:
       - 80:80
+  consumer-academico:
+    build: ./academico-php
+    volumes:
+      - ./academico-php:/app
+    working_dir: /app
+    command: php receive.php
+    depends_on:
+      - rabbitmq
