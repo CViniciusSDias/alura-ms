@@ -10,3 +10,6 @@
 [submodule "academico-php"]
 	path = academico-php
 	url = git@github.com:CViniciusSDias/alura-ms-academico-php.git
+[submodule "academico-php-web"]
+	path = academico-php-web
+	url = git@github.com:CViniciusSDias/alura-ms-web-academico-php.git
