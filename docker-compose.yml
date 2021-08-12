@@ -10,6 +10,7 @@ services:
       - 4200:4200
     environment:
       API_URL: "http://web-mkt:3000"
+
   web-mkt:
     image: node
     volumes:
@@ -21,6 +22,7 @@ services:
       MONGO_URL: "mongodb://mkt-usuario:mkt-senha@mongo-mkt:27017/mkt?authSource=admin"
     ports:
       - 3000:3000
+
   mongo-mkt:
     image: mongo
     environment:
@@ -39,6 +41,7 @@ services:
     volumes:
       - ./financeiro-php:/app
     working_dir: /app
+
   api-gateway:
     image: nginx
     volumes:
@@ -46,6 +49,7 @@ services:
     restart: always
     ports:
       - 80:80
+
   consumer-academico:
     build: ./academico-php
     volumes:
@@ -54,3 +58,35 @@ services:
     command: php receive.php
     depends_on:
       - rabbitmq
+      - postgre-academico
+    environment:
+      DB_DSN: pgsql:host=postgre-academico;dbname=academico;port=5432
+      DB_USERNAME: usuario_academico
+      DB_PASSWORD: senhapg
+
+  postgre-academico:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: senhapg
+      POSTGRES_USER: usuario_academico
+      POSTGRES_DB: academico
+
+  web-academico:
+    build: ./academico-php-web
+    environment:
+      JWT_KEY: chave-jwt
+      DB_CONNECTION: pgsql
+      DB_HOST: postgre-academico
+      DB_DATABASE: academico
+      DB_USERNAME: usuario_academico
+      DB_PASSWORD: senhapg
+      APP_KEY: c08cbbfd6eefc83ac6d23c4c791277e4
+      APP_URL: http://web-academico:8080
+    volumes:
+      - ./academico-php-web/:/app
+    working_dir: /app
+    command: bash -c "php artisan migrate --force && php -S web-academico:8080 -t public"
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgre-academico
