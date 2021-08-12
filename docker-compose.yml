@@ -20,6 +20,10 @@ services:
     environment: 
       SERVER_PORT: 3000
       MONGO_URL: "mongodb://mkt-usuario:mkt-senha@mongo-mkt:27017/mkt?authSource=admin"
+      RABBITMQ_HOST: 'rabbitmq'
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSWORD: guest
     ports:
       - 3000:3000
 
@@ -29,10 +33,12 @@ services:
       MONGO_INITDB_ROOT_USERNAME: mkt-usuario
       MONGO_INITDB_ROOT_PASSWORD: mkt-senha
       MONGO_INITDB_DATABASE: mkt
+
   rabbitmq:
     image: rabbitmq
     ports:
       - 5672:5672
+
   web-financeiro:
     build: ./financeiro-php
     command: php index.php
@@ -63,6 +69,10 @@ services:
       DB_DSN: pgsql:host=postgre-academico;dbname=academico;port=5432
       DB_USERNAME: usuario_academico
       DB_PASSWORD: senhapg
+      RABBITMQ_HOST: 'rabbitmq'
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSWORD: guest
 
   postgre-academico:
     image: postgres
