@@ -26,6 +26,9 @@ services:
       RABBITMQ_PASSWORD: guest
     ports:
       - 3000:3000
+    depends_on:
+      - rabbitmq
+      - mongo-mkt
 
   mongo-mkt:
     image: mongo
@@ -47,6 +50,8 @@ services:
     volumes:
       - ./financeiro-php:/app
     working_dir: /app
+    depends_on:
+      - rabbitmq
 
   api-gateway:
     image: nginx
@@ -92,10 +97,12 @@ services:
       DB_PASSWORD: senhapg
       APP_KEY: c08cbbfd6eefc83ac6d23c4c791277e4
       APP_URL: http://web-academico:8080
+      APP_ENV: local
+      APP_DEBUG: "true"
     volumes:
       - ./academico-php-web/:/app
     working_dir: /app
-    command: bash -c "php artisan migrate --force && php -S web-academico:8080 -t public"
+    command: bash -c "php artisan migrate --force && php artisan db:seed --force && php -S web-academico:8080 -t public"
     ports:
       - 8080:8080
     depends_on:
