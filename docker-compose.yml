@@ -94,6 +94,8 @@ services:
       RABBITMQ_PORT: 5672
       RABBITMQ_USERNAME: guest
       RABBITMQ_PASSWORD: guest
+      GMAIL_USER: 'seu-email@gmail.com'
+      GMAIL_PASSWORD: 'sua-senha'
 
   postgre-academico:
     image: postgres
