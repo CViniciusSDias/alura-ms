@@ -1,15 +1,15 @@
 [submodule "front-end"]
 	path = front-end
-	url = git@github.com:CViniciusSDias/alura-ms-front.git
+	url = https://github.com/CViniciusSDias/alura-ms-front.git
 [submodule "mkt-node"]
 	path = mkt-node
-	url = git@github.com:CViniciusSDias/alura-ms-mkt-node.git
+	url = https://github.com/CViniciusSDias/alura-ms-mkt-node.git
 [submodule "financeiro-php"]
 	path = financeiro-php
-	url = git@github.com:CViniciusSDias/alura-ms-financeiro-php.git
+	url = https://github.com/CViniciusSDias/alura-ms-financeiro-php.git
 [submodule "academico-php"]
 	path = academico-php
-	url = git@github.com:CViniciusSDias/alura-ms-academico-php.git
+	url = https://github.com/CViniciusSDias/alura-ms-academico-php.git
 [submodule "academico-php-web"]
 	path = academico-php-web
-	url = git@github.com:CViniciusSDias/alura-ms-web-academico-php.git
+	url = https://github.com/CViniciusSDias/alura-ms-web-academico-php.git
