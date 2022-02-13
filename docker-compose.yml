@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   front:
-    image: node
+    image: node:16
     volumes:
       - ./front-end:/app
       - type: bind
@@ -15,7 +15,7 @@ services:
       API_URL: "http://web-mkt:3000"
 
   web-mkt:
-    image: node
+    image: node:16
     volumes:
       - ./mkt-node:/app
       - type: bind
