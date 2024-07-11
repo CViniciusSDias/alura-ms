@@ -6,7 +6,7 @@
 	url = https://github.com/CViniciusSDias/alura-ms-mkt-node.git
 [submodule "financeiro-php"]
 	path = financeiro-php
-	url = git@github.com:CViniciusSDias/alura-ms-financeiro-php.git
+	url = https://github.com/CViniciusSDias/alura-ms-financeiro-php.git
 [submodule "academico-php"]
 	path = academico-php
 	url = https://github.com/CViniciusSDias/alura-ms-academico-php.git
