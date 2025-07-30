@@ -1,0 +1,32 @@
+name: PHP Code Sniffer
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Composer Install
+      uses: php-actions/composer@v6
+      with:
+        php_extensions: sockets pdo_pgsql
+
+    - name: PHPCS
+      run: composer run phpcs
+
+    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
+    # Docs: https://getcomposer.org/doc/articles/scripts.md
+
+    # - name: Run test suite
+    #   run: composer run-script test
