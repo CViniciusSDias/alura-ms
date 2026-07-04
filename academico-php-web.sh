@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 if [ ! -d vendor ]; then
   composer install
 fi
